@@ -90,7 +90,7 @@ submission section, which writes `submission.csv`.
 
 | Date | Member | Work |
 |------|--------|------|
-| 04-11-2026 | Ümmügülsüm Çiftçi | Repository created; README, .gitignore and requirements added |
+| 04-11-2026 | Ümmügülsüm Çiftçi | Repository created; README, .gitignore and requirements,utils data  added |
 
 ## Kaggle submission history
 
