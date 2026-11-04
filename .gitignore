@@ -1,0 +1,7 @@
+   data/
+   *.zip
+   kaggle.json
+   train_texts.json
+   submission.csv
+   __pycache__/
+   .ipynb_checkpoints/
