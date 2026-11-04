@@ -7,7 +7,7 @@ CENG313 term project based on the Kaggle competition
 
 | Name | Student ID | GitHub |
 |------|-----------|--------|
-| Ümmügülsüm Çiftçi | C21112022014 | ummugulsumciftci |
+| Ümmügülsüm Çiftçi | C21112022014 | [@ummugulsumciftci](https://github.com/ummugulsumciftci) |
 
 ## Competition and dataset
 
@@ -31,15 +31,14 @@ Datasets are cited either by **DOI** (e.g. `https://doi.org/10.5061/dryad.6m3n9`
 
 ## Approach
 
-### Assignment 1 – EDA and baselines (`assignment1_eda_baseline.ipynb`)
+### Assignment 1 – EDA and baseline (`assignment1_eda_baseline.ipynb`)
 1. Text extraction from PDF (PyMuPDF, pypdf fallback) and XML, cleaning of identifiers broken by line breaks.
 2. EDA: file inventory, label/type distribution, DOI vs accession, repositories, text length,
    recall ceiling, candidate noise, position of citations, discriminative context words.
 3. Regex candidate extraction (DOIs + 16 accession families) with a ±250 character context window.
-4. Baselines, evaluated with 5-fold GroupKFold by article:
-   * **B0** regex + learned repository filter + majority type per identifier kind
-   * **B1** regex + filter + Primary/Secondary keyword rules
-   * **B2** TF-IDF (1–2 grams) + Logistic Regression, classes Primary / Secondary / None
+4. Baseline **B0 – regex + majority class**, evaluated with 5-fold GroupKFold by article: candidates are
+   kept only if their DOI prefix / accession family was a dataset in the training folds, and each kept
+   candidate gets the most frequent type of its kind (DOI or accession ID).
 
 ### Assignment 2 – proposed solution (`assignment2_solution.ipynb`)
 *To be added.*
@@ -48,10 +47,8 @@ Datasets are cited either by **DOI** (e.g. `https://doi.org/10.5061/dryad.6m3n9`
 
 | Model | Precision | Recall | F1 (CV) | Kaggle public | Kaggle private |
 |-------|-----------|--------|---------|---------------|----------------|
-| Oracle on regex candidates | 1.000 | – | – | – | – |
+| Oracle on regex candidates (upper bound) | 1.000 | | | – | – |
 | B0 regex + majority | | | | | |
-| B1 regex + keyword rules | | | | | |
-| B2 TF-IDF + LogReg | | | | | |
 
 ## Repository structure
 
@@ -59,11 +56,13 @@ Datasets are cited either by **DOI** (e.g. `https://doi.org/10.5061/dryad.6m3n9`
 GROUP30_CENG313/
 ├── README.md
 ├── requirements.txt
+├── .gitignore
 ├── assignment1_eda_baseline.ipynb
 ├── assignment2_solution.ipynb      (Assignment 2)
 └── src/
+    ├── __init__.py
     ├── data.py     paths, label loading, PDF/XML text extraction, cleaning
-    ├── models.py   baseline models + GroupKFold cross-validation
+    ├── models.py   baseline model B0 + GroupKFold cross-validation
     └── utils.py    identifier regexes, normalisation, candidates, F1 metric, submission
 ```
 
@@ -91,7 +90,7 @@ submission section, which writes `submission.csv`.
 
 | Date | Member | Work |
 |------|--------|------|
-| 04-10-2026 | Ümmügülsüm Çiftçi| repository created, readme, gitignore, requirements are written |
+| 04-11-2026 | Ümmügülsüm Çiftçi | Repository created; README, .gitignore and requirements added |
 
 ## Kaggle submission history
 
