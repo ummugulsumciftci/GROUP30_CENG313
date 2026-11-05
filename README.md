@@ -91,6 +91,8 @@ submission section, which writes `submission.csv`.
 | Date | Member | Work |
 |------|--------|------|
 | 04-11-2026 | Ümmügülsüm Çiftçi | Repository created; README, .gitignore and requirements,utils data  added |
+| 05-11-2026 | Ümmügülsüm Çiftçi | EDA |
+
 
 ## Kaggle submission history
 
