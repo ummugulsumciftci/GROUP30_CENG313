@@ -8,7 +8,7 @@ CENG313 term project based on the Kaggle competition
 | Name | Student ID | GitHub |
 |------|-----------|--------|
 | Ümmügülsüm Çiftçi | C21112022014 | [@ummugulsumciftci](https://github.com/ummugulsumciftci) |
-|Ayça Yalçın |C23118080775 |  https://github.com/Yalcinayca|
+|Ayça Yalçın |23118080775 |  https://github.com/Yalcinayca|
 ## Competition and dataset
 
 The goal is to find every reference to a research **dataset** in a scientific article and to classify it as
@@ -92,6 +92,8 @@ submission section, which writes `submission.csv`.
 |------|--------|------|
 | 04-11-2026 | Ümmügülsüm Çiftçi | Repository created; README, .gitignore and requirements,utils data  added |
 | 05-11-2026 | Ümmügülsüm Çiftçi | EDA |
+| 06-11-2026 | Ümmügülsüm Çiftçi | EDA |
+
 
 
 ## Kaggle submission history
