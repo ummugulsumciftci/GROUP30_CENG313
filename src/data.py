@@ -113,7 +113,7 @@ def extract_pdf_text(path: str | Path) -> str:
     """Extract raw text from a PDF.
 
     PyMuPDF (fitz) is fast and keeps the reading order well; pypdf is a pure
-    python fallback that is pre-installed almost everywhere.
+    python fallback (used e.g. on Kaggle, where PyMuPDF is not installed).
     """
     try:
         import fitz  # PyMuPDF
@@ -125,7 +125,13 @@ def extract_pdf_text(path: str | Path) -> str:
     from pypdf import PdfReader
 
     reader = PdfReader(str(path))
-    return "\n".join((page.extract_text() or "") for page in reader.pages)
+    pages = []
+    for page in reader.pages:
+        try:
+            pages.append(page.extract_text() or "")
+        except Exception:  # one broken page must not drop the whole article
+            pages.append("")
+    return "\n".join(pages)
 
 
 def extract_xml_text(path: str | Path) -> str:
@@ -171,8 +177,14 @@ def article_text(row: dict, source: str = "both") -> str:
     pdf_path, xml_path = row.get("pdf_path"), row.get("xml_path")
     pdf_path = pdf_path if isinstance(pdf_path, str) else None   # NaN / None -> None
     xml_path = xml_path if isinstance(xml_path, str) else None
-    pdf = extract_pdf_text(pdf_path) if pdf_path and source in ("pdf", "both", "xml_first") else ""
-    xml = extract_xml_text(xml_path) if xml_path and source in ("xml", "both", "xml_first") else ""
+    pdf, xml = "", ""
+    if pdf_path and source in ("pdf", "both", "xml_first"):
+        try:
+            pdf = extract_pdf_text(pdf_path)
+        except Exception as e:  # keep the XML text if only the PDF is broken
+            print(f"[warn] PDF failed, using XML only: {Path(pdf_path).stem}: {e}")
+    if xml_path and source in ("xml", "both", "xml_first"):
+        xml = extract_xml_text(xml_path)
     if source == "xml_first":
         return clean_text(xml) if xml else clean_text(pdf)
     return clean_text(" \n ".join(t for t in (pdf, xml) if t))
