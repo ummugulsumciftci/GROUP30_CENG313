@@ -118,4 +118,4 @@ notebook's submission section, which writes `submission.csv`.
 
 | Date | Notebook version | Model | Public LB | Private LB |
 |------|------------------|-------|-----------|------------|
-| 08–11-2026 | 1 | B0 regex + majority | -  | – |
+| 08–11-2026 | 2 | B0 regex + majority | -  | – |
