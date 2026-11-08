@@ -8,7 +8,7 @@ CENG313 term project based on the Kaggle competition
 | Name | Student ID | GitHub |
 |------|-----------|--------|
 | Ümmügülsüm Çiftçi | C21112022014 | [@ummugulsumciftci](https://github.com/ummugulsumciftci) |
-
+|Ayça Yalçın |C23118080775 | aycayalcin539@gmail.com |
 ## Competition and dataset
 
 The goal is to find every reference to a research **dataset** in a scientific article and to classify it as
