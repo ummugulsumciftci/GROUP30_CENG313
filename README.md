@@ -93,7 +93,7 @@ submission section, which writes `submission.csv`.
 | 04-11-2026 | Ümmügülsüm Çiftçi | Repository created; README, .gitignore and requirements,utils data  added |
 | 05-11-2026 | Ümmügülsüm Çiftçi | EDA |
 | 06-11-2026 | Ümmügülsüm Çiftçi | EDA |
-
+| 08-11-2026 | Ayça Yalçın | Baseline model execution, column mapping (`dataset_id`) fix, submission generation, and notebook sync to GitHub |
 
 
 ## Kaggle submission history
