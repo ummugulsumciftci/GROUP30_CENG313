@@ -66,7 +66,11 @@ additional accession patterns, compared against B0 with the same CV protocol.
 | Model | Precision | Recall | F1 (CV) | F1 per fold (mean ± std) | Kaggle public | Kaggle private |
 |-------|-----------|--------|---------|--------------------------|---------------|----------------|
 | Oracle on regex candidates (upper bound) | 1.000 | 0.826 | 0.905 | – | – | – |
-| B0 regex + majority | 0.265 | 0.410 | 0.322 | 0.321 ± 0.087 | not submitted yet | not submitted yet |
+| B0 regex + majority | 0.265 | 0.410 | 0.322 | 0.321 ± 0.087 | 0.480 | 0.319 |
+
+The private leaderboard score of B0 (0.319) is almost identical to its cross-validation F1 (0.322), which shows that
+article-level GroupKFold is a reliable estimate of the performance on unseen articles. The public score (0.480) is
+computed on a smaller part of the hidden test set and is therefore noisier.
 
 ## Repository structure
 
@@ -100,9 +104,12 @@ kaggle competitions download -c make-data-count-finding-data-references -p data 
 jupyter notebook assignment1_eda_baseline.ipynb
 ```
 
-**Kaggle (submission):** this is a code competition. Upload `src/` as a Kaggle Dataset, attach it and the
-competition data to a new notebook (internet off), add `sys.path.append("/kaggle/input/<src-dataset>")` and run the
-notebook's submission section, which writes `submission.csv`.
+**Kaggle (submission):** this is a code competition, so predictions must be produced by a Kaggle notebook with
+internet disabled. Upload the `src/` folder as a private Kaggle Dataset and attach it, together with the competition
+data, to a new notebook. The notebook copies `src/` to `/kaggle/working/src`, trains B0 on all training articles,
+predicts the test articles and writes `/kaggle/working/submission.csv`; then *Save Version → Save & Run All* and
+submit that version. PyMuPDF is not available offline on Kaggle, so PDF text is extracted with pypdf there
+(slower – about 25 min for the training articles – and slightly different text than in Colab).
 
 ## Progress log
 
@@ -113,9 +120,14 @@ notebook's submission section, which writes `submission.csv`.
 | 06-11-2026 | Ümmügülsüm Çiftçi | EDA: extended accession regexes, candidates, positions, context words |
 | 08-11-2026 | Ayça Yalçın | Baseline B0 (regex + majority) in `src/models.py`, 5-fold GroupKFold CV, error analysis, submission file |
 | 08-11-2026 | Ümmügülsüm Çiftçi | EDA interpretations, summary and README results |
+| 08-11-2026 | Ümmügülsüm Çiftçi | PDF extraction made robust to broken pages (pypdf on Kaggle); Kaggle notebook and first submission (B0) |
+| 09-11-2026 | Ümmügülsüm Çiftçi | Kaggle results added to README (public 0.480, private 0.319) |
 
 ## Kaggle submission history
 
 | Date | Notebook version | Model | Public LB | Private LB |
 |------|------------------|-------|-----------|------------|
-| 08–11-2026 | 2 | B0 regex + majority | -  | – |
+| 08-11-2026 | Version 2 ([notebook](https://www.kaggle.com/code/mmglsmifti/group30-ceng313)) | B0 regex + majority | 0.47957 | 0.31936 |
+
+Late submission (after the competition deadline) from @ummugulsumciftci's Kaggle account. Version 1 was rejected
+because internet was enabled in the notebook.
