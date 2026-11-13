@@ -1,7 +1,12 @@
 # GROUP30_CENG313 – Make Data Count: Finding Data References
 
+**Group ID:** 30
+
 CENG313 term project based on the Kaggle competition
 [Make Data Count – Finding Data References](https://www.kaggle.com/competitions/make-data-count-finding-data-references).
+
+**Current Kaggle score (late submission, baseline B0):** public 0.480 · private 0.319 – screenshot in
+[`submissions/`](submissions/)
 
 ## Team
 
@@ -70,7 +75,8 @@ additional accession patterns, compared against B0 with the same CV protocol.
 
 The private leaderboard score of B0 (0.319) is almost identical to its cross-validation F1 (0.322), which shows that
 article-level GroupKFold is a reliable estimate of the performance on unseen articles. The public score (0.480) is
-computed on a smaller part of the hidden test set and is therefore noisier.
+computed on a smaller part of the hidden test set and is therefore noisier. The screenshot of the submission is in
+[`submissions/`](submissions/).
 
 ## Repository structure
 
@@ -80,27 +86,42 @@ GROUP30_CENG313/
 ├── requirements.txt
 ├── .gitignore
 ├── assignment1_eda_baseline.ipynb
-├── assignment2_solution.ipynb      (Assignment 2)
-└── src/
-    ├── __init__.py
-    ├── data.py     paths, label loading, PDF/XML text extraction, cleaning
-    ├── models.py   baseline model B0, oracle, GroupKFold cross-validation
-    └── utils.py    identifier regexes, normalisation, candidates, F1 metric, submission
+├── assignment2_solution.ipynb      (placeholder, completed in Assignment 2)
+├── src/
+│   ├── __init__.py   empty, makes src importable
+│   ├── data.py       paths, label loading, PDF/XML text extraction, cleaning
+│   ├── models.py     baseline model B0, oracle, GroupKFold cross-validation
+│   └── utils.py      identifier regexes, normalisation, candidates, F1 metric, submission
+├── data/             NOT committed (downloaded with the Kaggle API, excluded in .gitignore)
+└── submissions/      Kaggle score screenshots
 ```
+
+## Data download
+
+The data is not part of this repository. Join the competition on Kaggle and accept its rules, create an API key
+(*Kaggle → Settings → API → Create Legacy API Key*, which downloads `kaggle.json`), then run:
+
+```bash
+kaggle competitions download -c make-data-count-finding-data-references -p data
+unzip data/make-data-count-finding-data-references.zip -d data
+```
+
+In Colab, the second cell of the notebook does this automatically: it asks for `kaggle.json` and unpacks the data to
+`/content/data`.
 
 ## How to run
 
-**Google Colab**
-1. Open `assignment1_eda_baseline.ipynb` in Colab (*File → Open notebook → GitHub*).
+**Google Colab** – [open `assignment1_eda_baseline.ipynb` in Colab](https://colab.research.google.com/github/ceng313-2026/GROUP30_CENG313/blob/main/assignment1_eda_baseline.ipynb)
+1. Open `assignment1_eda_baseline.ipynb` in Colab (link above, or *File → Open notebook → GitHub*).
 2. Set `GITHUB_USER` and `REPO_DIR` in the first cell and run it (clones the repo, installs PyMuPDF). For a private repo, add a `GITHUB_TOKEN` secret in Colab first.
 3. Accept the competition rules on Kaggle, create `kaggle.json` (*Kaggle → Settings → API → Create Legacy API Key*) and upload it when the second cell asks.
 4. *Runtime → Run all* (text extraction takes about one minute; the extracted texts are cached in `/content/train_texts.json`).
 
 **Local**
 ```bash
-git clone https://github.com/ummugulsumciftci/GROUP30_CENG313.git && cd GROUP30_CENG313
+git clone https://github.com/ceng313-2026/GROUP30_CENG313.git && cd GROUP30_CENG313
 pip install -r requirements.txt
-kaggle competitions download -c make-data-count-finding-data-references -p data && unzip data/*.zip -d data
+# download the data into data/ as described in "Data download"
 jupyter notebook assignment1_eda_baseline.ipynb
 ```
 
@@ -122,6 +143,8 @@ submit that version. PyMuPDF is not available offline on Kaggle, so PDF text is 
 | 08-11-2026 | Ümmügülsüm Çiftçi | EDA interpretations, summary and README results |
 | 08-11-2026 | Ümmügülsüm Çiftçi | PDF extraction made robust to broken pages (pypdf on Kaggle); Kaggle notebook and first submission (B0) |
 | 09-11-2026 | Ümmügülsüm Çiftçi | Kaggle results added to README (public 0.480, private 0.319) |
+| 13-11-2026 | Ümmügülsüm Çiftçi | Notebook restructured into the 7 required sections: problem definition, data overview, preprocessing, interpretation of every plot, conclusion |
+
 
 ## Kaggle submission history
 
